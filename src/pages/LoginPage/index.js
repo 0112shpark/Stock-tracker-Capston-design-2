@@ -17,7 +17,10 @@ const LoginPage = () => {
   // returns current path.
   const { pathname } = useLocation();
   const auth = getAuth();
-  const provider = new GoogleAuthProvider();
+  var provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: "select_account",
+  });
   const ref = useRef();
 
   useEffect(() => {

@@ -20,6 +20,17 @@ const Nav = () => {
   const { pathname } = useLocation();
   const auth = getAuth();
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        if (pathname === "/") navigate("/main");
+      } else {
+        navigate("/");
+      }
+    });
+  }, [auth, navigate, pathname]);
+
   const handleLogout = () => {
     signOut(auth)
       .then((result) => {
