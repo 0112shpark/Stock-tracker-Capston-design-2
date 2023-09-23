@@ -3,7 +3,6 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithPopup,
-  signInWithRedirect,
 } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -33,7 +32,7 @@ const LoginPage = () => {
   }, [auth, navigate, pathname]);
 
   const handleAuth = () => {
-    signInWithRedirect(auth, provider)
+    signInWithPopup(auth, provider)
       .then((result) => {
         setUserData(result.user);
 
