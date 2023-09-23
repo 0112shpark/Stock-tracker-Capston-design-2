@@ -108,39 +108,6 @@ const UserImg = styled.img`
   height: 100%;
 `;
 
-const Login = styled.a/*css*/ `
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 8px 16px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  border: 1px solid #f9f9f9;
-  transition: 0.2s ease 0s;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #f9f9f9;
-    color: gray;
-    border-color: transparent;
-  }
-`;
-
-const Clickbutton = styled.div`
-  position: absolute;
-  right: 35%;
-`;
-const Input = styled.input/*css*/ `
-  position: fixed;
-  left: 50%;
-
-  transform: translate(-50%, 0);
-  background-color: rgba(0, 0, 0, 0.582);
-  border-radius: 5px;
-  color: white;
-  padding: 5px;
-  border: none;
-  outline: none;
-`;
-
 const NavWrapper = styled.div`
   position: fixed;
   top: 0;
@@ -161,10 +128,10 @@ const Logo = styled.a`
   padding: 0;
   width: 80px;
   margin-top: 4px;
-  max-height: 70px;
+  max-height: 700px;
   font-size: 0;
   display: inline-block;
-
+  cursor: pointer;
   img {
     display: block;
     width: 100%;
