@@ -6,12 +6,12 @@ const LoginPage = () => {
     <Container>
       <Content>
         <Center>
-          <LogoOne src="/images/logo1.png" alt="logo-one" />
-          <SignUpLink>Sign-In</SignUpLink>
-          <Description>
-            Get access to your best Stock Market Partner
-          </Description>
-          {/* <LogoTwo src="/images/cta-logo-two.png" alt="logo-two" /> */}
+          <LogoOne src="/images/그림1.png" alt="logo-one" />
+          <SignUpLink>Get access to your best Stock Market Partner</SignUpLink>
+          <LogoTwo src="/images/logo1.png" alt="logo-two" />
+          {/* <Description>
+            
+          </Description> */}
         </Center>
         <BgImage />
       </Content>
@@ -61,11 +61,11 @@ const Center = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-itmes: center;
+  align-items: center;
 `;
 
 const LogoOne = styled.img`
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
   max-width: 600px;
   min-height: 1px;
 
@@ -77,7 +77,7 @@ const SignUpLink = styled.a`
   font-weight: bold;
   color: #f9f9f9;
   background-color: #0063e5;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
   width: 100%;
   letter-spacing: 1.5px;
   font-size: 18px;
@@ -101,7 +101,7 @@ const Description = styled.p`
 
 const LogoTwo = styled.img`
   max-width: 600px;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   display: inline-block;
   vertical-align: bottom;
   width: 100%;
