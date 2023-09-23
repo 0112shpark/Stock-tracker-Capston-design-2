@@ -1,23 +1,27 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { Outlet, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import MainPage from "./pages/Mainpage";
+
+const Layout = () => {
+  return (
+    <div>
+      <Outlet />
+      {/* outlet부분에 child component rendering 
+      여기선 outlet 다른 nav comp등이 없기에 굳이 필요 X*/}
+    </div>
+  );
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React1
-        </a>
-      </header>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<LoginPage />} />
+          <Route path="main" element={<MainPage />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
