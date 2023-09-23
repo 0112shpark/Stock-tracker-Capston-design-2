@@ -1,13 +1,55 @@
-import React from "react";
+import {
+  GoogleAuthProvider,
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+  signInWithRedirect,
+} from "firebase/auth";
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const LoginPage = () => {
+  const initialUserData = localStorage.getItem("userData")
+    ? JSON.parse(localStorage.getItem("userData"))
+    : {};
+  const [userData, setUserData] = useState(initialUserData);
+  const navigate = useNavigate();
+  // returns current path.
+  const { pathname } = useLocation();
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  const ref = useRef();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        if (pathname === "/") navigate("/main");
+      } else {
+        navigate("/");
+      }
+    });
+  }, [auth, navigate, pathname]);
+
+  const handleAuth = () => {
+    signInWithRedirect(auth, provider)
+      .then((result) => {
+        setUserData(result.user);
+
+        localStorage.setItem("userData", JSON.stringify(result.user));
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <Container>
       <Content>
         <Center>
           <LogoOne src="/images/그림1.png" alt="logo-one" />
-          <SignUpLink>Get access to your best Stock Market Partner</SignUpLink>
+          <SignUpLink onClick={handleAuth}>
+            Get access to your best Stock Market Partner
+          </SignUpLink>
           <LogoTwo src="/images/logo1.png" alt="logo-two" />
           {/* <Description>
             
@@ -73,7 +115,7 @@ const LogoOne = styled.img`
   width: 100%;
 `;
 
-const SignUpLink = styled.a`
+const SignUpLink = styled.button`
   font-weight: bold;
   color: #f9f9f9;
   background-color: #0063e5;
