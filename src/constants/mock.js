@@ -28,7 +28,7 @@ export const mockSearchResults = {
   ],
 };
 
-export const mockCompantDetails = {
+export const mockCompanyDetails = {
   country: "US",
   currency: "USD",
   exchange: "NASDAQ/NMS (GLOBAL MARKET)",
