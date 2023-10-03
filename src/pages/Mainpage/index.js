@@ -1,20 +1,15 @@
 import React from "react";
 import Nav from "../../components/Nav";
-import { Pulsar } from "@uiball/loaders";
-import { Dna } from "react-loader-spinner";
+import "./index.css";
+
+import Dashboard from "../../components/Dashboard";
 const MainPage = () => {
   return (
     <>
-      <Nav />
-      <div>MainPage</div>\
-      {/* <Dna
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="dna-loading"
-        wrapperStyle={{}}
-        wrapperClass="dna-wrapper"
-      /> */}
+      <div className="container1">
+        <Nav />
+        <Dashboard />
+      </div>
     </>
   );
 };
