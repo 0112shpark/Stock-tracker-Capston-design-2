@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { mockSearchResults } from "../constants/mock";
 import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import SearchResult from "./SearchResult";
 import ThemeContext from "../context/ThemeContext";
+import { searchSymbol } from "../api/Stock-api";
 
 const Search = () => {
   const { darkMode } = useContext(ThemeContext);
   const [input, setInput] = useState("");
-  const [bestMatches, setBestMatches] = useState(mockSearchResults.result);
+  const [bestMatches, setBestMatches] = useState([]);
 
   //TODO: 검색 결과창 바깥 클릭시 검색창 닫기 구현
   const clear = () => {
@@ -15,8 +15,17 @@ const Search = () => {
     setBestMatches([]);
   };
 
-  const updateBestMatches = () => {
-    setBestMatches(mockSearchResults.result);
+  const updateBestMatches = async () => {
+    try {
+      if (input) {
+        const searchResults = await searchSymbol(input);
+        const result = searchResults.result;
+        setBestMatches(result);
+      }
+    } catch (error) {
+      setBestMatches([]);
+      console.log(error);
+    }
   };
   return (
     <div
