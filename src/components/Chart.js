@@ -24,7 +24,14 @@ const Chart = () => {
   const [Filter, setFilter] = useState("1W");
   const { darkMode } = useContext(ThemeContext);
   const { stocksymbol } = useContext(StockContext);
-
+  const formatData = (data) => {
+    return data.c.map((item, index) => {
+      return {
+        value: item.toFixed(2),
+        date: convertUnixTimestampToDate(data.t[index]),
+      };
+    });
+  };
   useEffect(() => {
     const getDateRange = () => {
       const { days, weeks, months, years } = chartConfig[Filter];
@@ -57,14 +64,6 @@ const Chart = () => {
     updateChartData();
   }, [stocksymbol, Filter]);
 
-  const formatData = (data) => {
-    return data.c.map((item, index) => {
-      return {
-        value: item.toFixed(2),
-        date: convertUnixTimestampToDate(data.t[index]),
-      };
-    });
-  };
   return (
     <Card>
       <ul className="flex absolute top-2 right-2 z-40">
@@ -112,7 +111,13 @@ const Chart = () => {
             //cursor={{ stroke: "red", strokeWidth: 2 }}
           ></Tooltip>
           <XAxis dataKey={"date"}></XAxis>
-          <YAxis domain={("dataMin", "dataMax")}></YAxis>
+          <YAxis
+            domain={
+              Filter === "1Y"
+                ? ["dataMin-50", "dataMax+50"]
+                : ["dataMin", "dataMax"]
+            }
+          ></YAxis>
         </AreaChart>
       </ResponsiveContainer>
     </Card>

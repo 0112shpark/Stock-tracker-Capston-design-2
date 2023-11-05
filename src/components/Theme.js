@@ -11,9 +11,10 @@ const Theme = () => {
 
   return (
     <button
-      className={`rounded-lg border-1 border-neutral-400 p-2 absolute right-8 xl:right-32 shadow-lg ${
+      className={`rounded-lg border-1 border-neutral-400 p-2 absolute right-8 xl:right-32 shadow-lg transition duration-300 hover:scale-125 ${
         darkMode ? "shadow-gray-800" : null
-      }`}
+      } `}
+      t
       onClick={toggleDarkMode}
     >
       <MoonIcon
