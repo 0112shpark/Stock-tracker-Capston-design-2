@@ -27,13 +27,15 @@ const Chart = () => {
   const { darkMode } = useContext(ThemeContext);
   const { stocksymbol } = useContext(StockContext);
 
-  const getTodayIndex = () => {
+  const getFormattedDate = () => {
     const today = new Date();
-    const todayString = convertUnixTimestampToDate(
-      convertDateToUnixTimestamp(today)
-    );
-    const todayIndex = data.findIndex((item) => item.date === todayString);
-    return todayIndex;
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const day = today.getDate().toString().padStart(2, "0");
+
+    const formattedDate = `${year}. ${month}. ${day}.`;
+    console.log(formattedDate);
+    return formattedDate;
   };
 
   const formatData = (data) => {
@@ -58,7 +60,7 @@ const Chart = () => {
     };
 
     const jsonData = {
-      0: { value: 190.69000244140625, date: "2023. 11. 17." },
+      0: { value: 190.69000244140625, date: "2023. 11. 18." },
       1: { value: 191.77000427246094, date: "2023. 11. 20." },
       2: { value: 192.83999633789062, date: "2023. 11. 21." },
       3: { value: 193.88999938964844, date: "2023. 11. 22." },
@@ -195,7 +197,7 @@ const Chart = () => {
             itemStyle={darkMode ? { color: "#818cf8" } : null}
             //cursor={{ stroke: "red", strokeWidth: 2 }}
           ></Tooltip>
-          <ReferenceLine x="2023. 11. 17." stroke="red" label="Today" />
+          <ReferenceLine x={getFormattedDate()} stroke="red" label="Today" />
           <XAxis dataKey={"date"}></XAxis>
           <YAxis
             domain={

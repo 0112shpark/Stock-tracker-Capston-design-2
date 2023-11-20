@@ -12,16 +12,20 @@ const MainPage = () => {
   const [data, setdata] = useState([]);
 
   useEffect(() => {
-    fetch("/members")
-      .then(
-        // response 객체의 json() 이용하여 json 데이터를 객체로 변화
-        (res) => res.json()
-      )
+    fetch("/members", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ stocksymbol }), // Send an object with the key 'stocksymbol'
+    })
+      .then((res) => res.json())
       .then((data) => {
         setdata(data);
         console.log(data);
       });
   }, []);
+
   return (
     <>
       <div className="container1">
