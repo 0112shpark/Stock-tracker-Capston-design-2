@@ -44,20 +44,13 @@ const Dashboard = () => {
     >
       <div className=" col-span-1 md:col-span-2 xl:col-span-3 row-span-1 flex justify-start items-center">
         <Header name={stockDetails.name} />
+        <Overview />
       </div>
       <div className="md:col-span-2 row-span-4">
         <Chart />
       </div>
-      <div>
-        <Overview
-          symbol={stocksymbol}
-          price={quote.pc}
-          change={quote.d}
-          changePercent={quote.dp}
-          currency={stockDetails.currency}
-        />
-      </div>
-      <div className="row-span-2 xl:row-span-3">
+
+      <div className="row-span-2 xl:row-span-4">
         <Details details={stockDetails} />
       </div>
     </div>

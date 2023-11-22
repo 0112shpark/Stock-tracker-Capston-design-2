@@ -1,45 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import Card from "./Card";
 import ThemeContext from "../context/ThemeContext";
+import StockContext from "../context/StockContext";
 
 const Details = ({ details }) => {
+  const container = useRef();
   const { darkMode } = useContext(ThemeContext);
-  const detailsList = {
-    name: "Name",
-    country: "Country",
-    currency: "Currency",
-    exchange: "Exchange",
-    ipo: "IPO Date",
-    marketCapitalization: "Market Capitalization",
-    finnhubIndustry: "Industry",
-  };
+  const { stocksymbol } = useContext(StockContext);
+  let colorTheme = darkMode ? "dark" : "light";
+  let stockSymbol = stocksymbol;
 
-  const convertMillionToBillion = (number) => {
-    return (number / 1000).toFixed(2);
-  };
+  useEffect(() => {
+    container.current.innerHTML = "";
+    const script = document.createElement("script");
+    script.src =
+      "https://s3.tradingview.com/external-embedding/embed-widget-financials.js";
+    script.type = "text/javascript";
+    script.async = true;
+    script.innerHTML = `
+      {
+        "colorTheme": "${colorTheme}",
+        "isTransparent": false,
+        "largeChartUrl": "",
+        "displayMode": "regular",
+        "width": "100%",
+        "height": "100%",
+        "symbol": "${stockSymbol}",
+        "locale": "en"
+      }`;
+
+    container.current.appendChild(script);
+  }, [colorTheme, stockSymbol]); // Empty dependency array ensures the effect runs once after the initial render
 
   return (
-    <Card>
-      <ul
-        className={`w-full h-full flex flex-col justify-between divide-y-1 ${
-          darkMode ? "divide-gray-800" : null
-        }`}
-      >
-        {Object.keys(detailsList).map((item) => {
-          return (
-            <li key={item} className="flex-1 flex justify-between items-center">
-              <span>{detailsList[item]}</span>
-
-              <span>
-                {item === "marketCapitalization"
-                  ? `${convertMillionToBillion(details[item])}B`
-                  : details[item]}
-              </span>
-            </li>
-          );
-        })}
-      </ul>
-    </Card>
+    <div className="tradingview-widget-container" ref={container}>
+      <div className="tradingview-widget-container__widget"></div>
+      <div className="tradingview-widget-copyright"></div>
+    </div>
   );
 };
 

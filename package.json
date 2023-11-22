@@ -2,7 +2,7 @@
   "name": "stock-predict",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://127.0.0.1:5000",
+  "proxy": "http://127.0.0.1:5000",
   "dependencies": {
     "@heroicons/react": "^2.0.18",
     "@testing-library/jest-dom": "^5.17.0",
@@ -18,7 +18,9 @@
     "react-scripts": "5.0.1",
     "recharts": "^2.8.0",
     "styled-components": "^6.0.8",
-    "web-vitals": "^2.1.4"
+    "url": "^0.11.3",
+    "web-vitals": "^2.1.4",
+    "yahoo-finance2": "^2.9.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,28 +1,47 @@
-import React from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import Card from "./Card";
+import ThemeContext from "../context/ThemeContext";
+import StockContext from "../context/StockContext";
 
-const Overview = ({ symbol, price, change, changePercent, currency }) => {
+const Overview = () => {
+  const container = useRef();
+  const { darkMode } = useContext(ThemeContext);
+  const { stocksymbol } = useContext(StockContext);
+  let colorTheme = darkMode ? "dark" : "light";
+  let stockSymbol = stocksymbol;
+
+  useEffect(() => {
+    container.current.innerHTML = "";
+    const script = document.createElement("script");
+    script.src =
+      "https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js";
+    script.type = "text/javascript";
+    script.async = true;
+    script.innerHTML = `
+      {
+        "symbol": "${stockSymbol}",
+        "width": 1000,
+        "locale": "en",
+        "colorTheme": "${colorTheme}",
+        "isTransparent": false
+      }`;
+
+    container.current.appendChild(script);
+  }, [colorTheme, stockSymbol]); // Empty dependency array ensures the effect runs once after the initial render
+
   return (
-    <Card>
-      <span className="absolute left-4 top-4 text-neutral-400 text-lg xl:text-xl 2xl:text-2xl">
-        {symbol}
-      </span>
-      <div className="w-full h-full flex items-center justify-around">
-        <span className="text-2xl xl:text-4xl 2xl:text-5xl flex items-center">
-          ${price}
-          <span className="text-lg xl:text-xl 2xl:text-2xl text-neutral-400 m-2">
-            {currency}
-          </span>
-        </span>
-        <span
-          className={`text-lg xl:text-xl 2xl:text-2xl  ${
-            change > 0 ? "text-lime-500" : "text-red-500"
-          }`}
+    <div className="tradingview-widget-container" ref={container}>
+      <div className="tradingview-widget-container__widget"></div>
+      <div className="tradingview-widget-copyright">
+        <a
+          href="https://www.tradingview.com/"
+          rel="noopener noreferrer"
+          target="_blank"
         >
-          {change} <span>({changePercent}%)</span>
-        </span>
+          <span className="blue-text">Track all markets on TradingView</span>
+        </a>
       </div>
-    </Card>
+    </div>
   );
 };
 
