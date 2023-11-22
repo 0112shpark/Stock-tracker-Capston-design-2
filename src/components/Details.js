@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useRef } from "react";
 import Card from "./Card";
 import ThemeContext from "../context/ThemeContext";
 import StockContext from "../context/StockContext";
+import Lang from "./Lang";
+import LangContext from "../context/LangContext";
 
 const Details = ({ details }) => {
   const container = useRef();
   const { darkMode } = useContext(ThemeContext);
   const { stocksymbol } = useContext(StockContext);
+  const { lang } = useContext(LangContext);
   let colorTheme = darkMode ? "dark" : "light";
   let stockSymbol = stocksymbol;
 
@@ -26,11 +29,11 @@ const Details = ({ details }) => {
         "width": "100%",
         "height": "100%",
         "symbol": "${stockSymbol}",
-        "locale": "en"
+        "locale": "${lang}"
       }`;
 
     container.current.appendChild(script);
-  }, [colorTheme, stockSymbol]); // Empty dependency array ensures the effect runs once after the initial render
+  }, [colorTheme, lang, stockSymbol]); // Empty dependency array ensures the effect runs once after the initial render
 
   return (
     <div className="tradingview-widget-container" ref={container}>

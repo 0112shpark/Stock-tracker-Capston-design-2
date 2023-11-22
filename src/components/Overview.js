@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useRef } from "react";
 import Card from "./Card";
 import ThemeContext from "../context/ThemeContext";
 import StockContext from "../context/StockContext";
+import Lang from "./Lang";
+import LangContext from "../context/LangContext";
 
 const Overview = () => {
   const container = useRef();
   const { darkMode } = useContext(ThemeContext);
   const { stocksymbol } = useContext(StockContext);
+  const { lang } = useContext(LangContext);
   let colorTheme = darkMode ? "dark" : "light";
   let stockSymbol = stocksymbol;
 
@@ -20,27 +23,19 @@ const Overview = () => {
     script.innerHTML = `
       {
         "symbol": "${stockSymbol}",
-        "width": 1000,
-        "locale": "en",
+        "width": "100%",
+        "locale": "${lang}",
         "colorTheme": "${colorTheme}",
         "isTransparent": false
       }`;
 
     container.current.appendChild(script);
-  }, [colorTheme, stockSymbol]); // Empty dependency array ensures the effect runs once after the initial render
+  }, [colorTheme, lang, stockSymbol]); // Empty dependency array ensures the effect runs once after the initial render
 
   return (
     <div className="tradingview-widget-container" ref={container}>
       <div className="tradingview-widget-container__widget"></div>
-      <div className="tradingview-widget-copyright">
-        <a
-          href="https://www.tradingview.com/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <span className="blue-text">Track all markets on TradingView</span>
-        </a>
-      </div>
+      <div className="tradingview-widget-copyright"></div>
     </div>
   );
 };

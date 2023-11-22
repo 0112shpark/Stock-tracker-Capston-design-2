@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useRef } from "react";
 import ThemeContext from "../context/ThemeContext";
+import LangContext from "../context/LangContext";
 
 const Ticket = () => {
   const container = useRef();
   const { darkMode } = useContext(ThemeContext);
+  const lang = useContext(LangContext);
   let colorTheme = darkMode ? "dark" : "light";
   useEffect(() => {
     container.current.innerHTML = "";
@@ -52,14 +54,18 @@ const Ticket = () => {
         "colorTheme": "${colorTheme}",
         "isTransparent": false,
         "displayMode": "adaptive",
-        "locale": "en"
+        "locale": "${lang}"
       }`;
 
     container.current.appendChild(script);
-  }, [colorTheme]); // Empty dependency array ensures the effect runs once after the initial render
+  }, [colorTheme, lang]); // Empty dependency array ensures the effect runs once after the initial render
 
   return (
-    <div className="tradingview-widget-container" ref={container}>
+    <div
+      className="tradingview-widget-container"
+      ref={container}
+      style={{ position: "fixed", top: "70px" }}
+    >
       <div className="tradingview-widget-container__widget"></div>
       <div className="tradingview-widget-copyright"></div>
     </div>

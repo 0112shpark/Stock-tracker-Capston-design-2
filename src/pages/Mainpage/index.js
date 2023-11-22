@@ -7,10 +7,12 @@ import ThemeContext from "../../context/ThemeContext";
 import StockContext from "../../context/StockContext";
 
 import Ticket from "../../components/Ticket";
+import LangContext from "../../context/LangContext";
 
 const MainPage = () => {
   const [darkMode, setdarkMode] = useState(false);
-  const [stocksymbol, setStockSymbol] = useState("FB");
+  const [stocksymbol, setStockSymbol] = useState("META");
+  const [lang, setlang] = useState("en");
   const [data, setdata] = useState([]);
 
   // useEffect(() => {
@@ -35,8 +37,10 @@ const MainPage = () => {
 
         <ThemeContext.Provider value={{ darkMode, setdarkMode }}>
           <StockContext.Provider value={{ stocksymbol, setStockSymbol }}>
-            <Ticket />
-            <Dashboard />
+            <LangContext.Provider value={{ lang, setlang }}>
+              <Ticket />
+              <Dashboard />
+            </LangContext.Provider>
           </StockContext.Provider>
         </ThemeContext.Provider>
       </div>

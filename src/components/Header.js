@@ -2,6 +2,7 @@ import React from "react";
 import Search from "./Search";
 import Theme from "./Theme";
 import Overview from "./Overview";
+import Lang from "./Lang";
 
 const Header = ({ name }) => {
   return (
@@ -10,6 +11,7 @@ const Header = ({ name }) => {
         <h1 className="text-5xl">{name}</h1>
         <Search />
         <Theme />
+        <Lang />
       </div>
     </>
   );

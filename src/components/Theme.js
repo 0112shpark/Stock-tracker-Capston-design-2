@@ -11,7 +11,7 @@ const Theme = () => {
 
   return (
     <button
-      className={`rounded-lg border-1 border-neutral-400 p-2 absolute left-8 xl:left-32 shadow-lg transition duration-300 hover:scale-125 ${
+      className={`rounded-lg border-1 border-neutral-400 p-2 absolute right-8 xl:right-20 top-20 shadow-lg transition duration-300 hover:scale-125 ${
         darkMode ? "shadow-gray-800" : null
       } `}
       t

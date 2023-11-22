@@ -5,11 +5,13 @@ import Card from "./Card";
 import ThemeContext from "../context/ThemeContext";
 
 import StockContext from "../context/StockContext";
+import LangContext from "../context/LangContext";
 
 function Chart() {
   const container = useRef();
   const { darkMode } = useContext(ThemeContext);
   const { stocksymbol } = useContext(StockContext);
+  const { lang } = useContext(LangContext);
   let colorTheme = darkMode ? "dark" : "light";
   let stockSymbol = stocksymbol;
 
@@ -33,7 +35,7 @@ function Chart() {
           "chartOnly": false,
           "width": "100%",
           "height": "100%",
-          "locale": "en",
+          "locale": "${lang}",
           "colorTheme": "${colorTheme}",
           "autosize": true,
           "showVolume": false,
@@ -64,7 +66,7 @@ function Chart() {
           ]
         }`;
     container.current.appendChild(script);
-  }, [colorTheme, stockSymbol]);
+  }, [colorTheme, lang, stockSymbol]);
 
   return (
     <>
