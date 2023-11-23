@@ -5,7 +5,7 @@ import "./index.css";
 import Dashboard from "../../components/Dashboard";
 import ThemeContext from "../../context/ThemeContext";
 import StockContext from "../../context/StockContext";
-
+import ModalContext from "../../context/ModalContext";
 import Ticket from "../../components/Ticket";
 import LangContext from "../../context/LangContext";
 
@@ -13,6 +13,7 @@ const MainPage = () => {
   const [darkMode, setdarkMode] = useState(false);
   const [stocksymbol, setStockSymbol] = useState("META");
   const [lang, setlang] = useState("en");
+  const [modal, setmodal] = useState(false);
   const [data, setdata] = useState([]);
 
   // useEffect(() => {
@@ -38,8 +39,10 @@ const MainPage = () => {
         <ThemeContext.Provider value={{ darkMode, setdarkMode }}>
           <StockContext.Provider value={{ stocksymbol, setStockSymbol }}>
             <LangContext.Provider value={{ lang, setlang }}>
-              <Ticket />
-              <Dashboard />
+              <ModalContext.Provider value={{ modal, setmodal }}>
+                <Ticket />
+                <Dashboard />
+              </ModalContext.Provider>
             </LangContext.Provider>
           </StockContext.Provider>
         </ThemeContext.Provider>

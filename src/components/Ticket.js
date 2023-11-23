@@ -48,14 +48,24 @@ const Ticket = () => {
           {
             "description": "NAVER",
             "proName": "KRX:035420"
+          },
+          {
+            "description": "삼성전자",
+            "proName": "KRX:005930"
+          },
+          {
+            "description": "NVDIA",
+            "proName": "NASDAQ:NVDA"
           }
         ],
-        "showSymbolLogo": true,
-        "colorTheme": "${colorTheme}",
-        "isTransparent": false,
-        "displayMode": "adaptive",
-        "locale": "${lang}"
-      }`;
+     
+      "showSymbolLogo": true,
+      "colorTheme": "${colorTheme}",
+      "isTransparent": false,
+      "displayMode": "adaptive",
+      "locale": "${lang}"
+}
+`;
 
     container.current.appendChild(script);
   }, [colorTheme, lang]); // Empty dependency array ensures the effect runs once after the initial render
