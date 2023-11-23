@@ -39,7 +39,7 @@ const Ticket = () => {
           },
           {
             "description": "",
-            "proName": "FX_IDC:KRWUSD"
+            "proName": "FX_IDC:USDKRW"
           },
           {
             "description": "KAKAO",
