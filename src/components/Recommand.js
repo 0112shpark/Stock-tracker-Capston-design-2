@@ -30,7 +30,12 @@ const Recommand = () => {
         "colorTheme": "${colorTheme}"
       }`;
 
-    container.current.appendChild(script);
+    const timeoutId = setTimeout(() => {
+      container.current.appendChild(script);
+    }, 5 * 60 * 1000); // 5 minutes in milliseconds
+
+    // Clear the timeout if the component unmounts or the dependency values change
+    return () => clearTimeout(timeoutId);
   }, [colorTheme, lang, stocksymbol]);
 
   return (
